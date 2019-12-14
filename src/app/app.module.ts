@@ -2,13 +2,10 @@ import { BrowserModule, TransferState, StateKey, makeStateKey, BrowserTransferSt
 import { NgModule } from '@angular/core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { IndexComponent } from './index/index.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { ViewerComponent } from './viewer/viewer.component';
-import { IndexLocalComponent } from './index-local/index-local.component';
 import { Observable } from 'rxjs';
+import { Routes, RouterModule } from '@angular/router';
 
 export function HttpLoaderFactory(http: HttpClient, state: TransferState) {
   return {
@@ -30,14 +27,20 @@ export function HttpLoaderFactory(http: HttpClient, state: TransferState) {
   } as TranslateLoader;
 }
 
+const routes: Routes = [
+  { path: 'alpha/:id', loadChildren: () => import('./gkd/gkd.module').then(m => m.GkdModule) },
+  { path: 'gkd/:id', loadChildren: () => import('./gkd/gkd.module').then(m => m.GkdModule) },
+  { path: '', loadChildren: () => import('./index/index.module').then(m => m.IndexModule) },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
+];
+
 @NgModule({
   declarations: [
-    AppComponent,
-    ViewerComponent
+    AppComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    AppRoutingModule,
+    RouterModule.forRoot(routes),
     HttpClientModule,
     BrowserTransferStateModule,
     TranslateModule.forRoot({

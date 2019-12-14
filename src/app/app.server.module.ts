@@ -5,7 +5,7 @@ import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
 import { readFileSync } from 'fs';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { Observable, Observer } from 'rxjs';
+import { Observable } from 'rxjs';
 import { makeStateKey, StateKey, TransferState } from '@angular/platform-browser';
 import { join } from 'path';
 

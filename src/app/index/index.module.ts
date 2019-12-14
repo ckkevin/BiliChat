@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { IndexRoutingModule } from './index-routing.module';
 import { IndexComponent } from './index.component';
-import { ChatRendererModule } from '../alpha/chat-renderer/chat-renderer.module';
+import { Routes, RouterModule } from '@angular/router';
 
+const routes: Routes = [{
+  path:'',
+  component: IndexComponent
+}];
 @NgModule({
   declarations: [IndexComponent],
   imports: [
     CommonModule,
-    ChatRendererModule,
-    IndexRoutingModule
+    RouterModule.forChild(routes)
   ]
 })
 export class IndexModule { }
