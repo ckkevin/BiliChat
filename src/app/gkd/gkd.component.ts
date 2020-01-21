@@ -92,7 +92,7 @@ export class GKDComponent {
       this.translate.get('GETROOMINFO').subscribe((value) => {
         this.renderer.sendSystemInfo(value);
       });
-      this.http.get(`${environment.api_server}/stat/${this.currentRoomId}`).subscribe(
+      this.http.get(`${environment.api_server}/v1/bili/stat/${this.currentRoomId}`).subscribe(
         (x: any) => {
           this.bili.ownerId = x.uid;
           if (x.config) {
@@ -113,7 +113,7 @@ export class GKDComponent {
             this.renderer.groupSimilarWindow = x.config.groupSimilarWindow || this.renderer.groupSimilarWindow;
             this.renderer.maxDammakuNum = x.config.maxDammakuNumber || this.renderer.maxDammakuNum;
           }
-          this.start(x.room_id);
+          this.start(x.info.room_id);
         },
         e => {
           this.translate.get('ROOMINFORAWID').subscribe((value) => {

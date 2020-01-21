@@ -201,7 +201,7 @@ export class MessageProcessorService {
     if (this.pure) {
       return of(environment.default_avatar);
     }
-    const obs = this.http.get(`${environment.api_server}/avturl/${userid}`)
+    const obs = this.http.get(`${environment.api_server}/v1/bili/avturl/${userid}`)
       .pipe(
         // mapTo(x=>x.json()),
         mergeMap((data: any) => {
