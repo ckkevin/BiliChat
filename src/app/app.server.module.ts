@@ -3,6 +3,7 @@ import { ServerModule, ServerTransferStateModule } from '@angular/platform-serve
 
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
+import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
 import { readFileSync } from 'fs';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
@@ -35,7 +36,8 @@ export function universalLoader(state: TransferState): TranslateLoader {
         useFactory: universalLoader,
         deps: [TransferState]
       }
-    })
+    }),
+    ModuleMapLoaderModule,
   ],
   bootstrap: [AppComponent],
 })
