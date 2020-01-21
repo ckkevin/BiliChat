@@ -15,7 +15,7 @@ import { SharedModule } from '../../shared/shared.module';
     CommonModule,
     SharedModule
   ],
-  exports:[
+  exports: [
     GKDRendererComponent,
     GKDMessageComponent,
     GKDLegacyPaidMessageComponent

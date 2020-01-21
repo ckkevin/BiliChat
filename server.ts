@@ -29,7 +29,7 @@ request('https://bilichat.3shain.com/version', { json: true }, (error, response,
   if (!error && response.statusCode == 200) {
     if (body.version > VERSION) {
       //console.info('Bilichat有更新了！前往 https://github.com/3Shain/BiliChat/releases 获取最新版！')
-      console.info('Bilichat有新版本了！输入指令 npm update bilichat -g 更新!')
+      console.info('Bilichat有新版本了！输入指令 npm install bilichat -g 更新!')
     }
   }
 });

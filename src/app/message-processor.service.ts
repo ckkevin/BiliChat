@@ -178,7 +178,7 @@ export class MessageProcessorService {
         }
       );
     } else if (rawData.cmd === 'SUPER_CHAT_MESSAGE_JPN') {
-      let msg = new GiftMessage(
+      const msg = new GiftMessage(
         rawData.data.uid,
         rawData.data.user_info.uname,
         undefined,

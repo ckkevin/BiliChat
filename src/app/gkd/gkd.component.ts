@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { GiftMessage, DanmakuMessage } from '../danmaku.def';
 import { GKDRendererComponent } from './gkd-renderer/gkd-renderer.component';
-import { GkdTickerRendererComponent } from './gkd-ticker-renderer/gkd-ticker-renderer.component';
+import { GkdTickerRendererComponent as GKDTickerRendererComponent } from './gkd-ticker-renderer/gkd-ticker-renderer.component';
 
 @Component({
   selector: 'yt-live-chat-renderer',
@@ -20,11 +20,11 @@ export class GKDComponent {
 
   currentRoomId: number;
 
-  @ViewChild('renderer',{static: true})
+  @ViewChild('renderer', { static: true })
   private renderer: GKDRendererComponent;
 
-  @ViewChild('tickerRenderer',{static: true})
-  private tickerRenderer: GkdTickerRendererComponent;
+  @ViewChild('tickerRenderer', { static: true })
+  private tickerRenderer: GKDTickerRendererComponent;
 
   private lastMessage: { [index: number]: { time: number, message: DanmakuMessage } } = {};
 
@@ -96,10 +96,10 @@ export class GKDComponent {
         (x: any) => {
           this.bili.ownerId = x.uid;
           if (x.config) {
-            this.proc.loadAvatar = x.config.loadAvatar!=undefined? x.config.loadAvatar : this.proc.loadAvatar;
+            this.proc.loadAvatar = x.config.loadAvatar != undefined ? x.config.loadAvatar : this.proc.loadAvatar;
             this.proc.userLevelFilter = x.config.levelFilter || this.proc.userLevelFilter;
-            this.proc.hideGiftDanmaku = x.config.hideGiftDanmaku !=undefined? x.config.hideGiftDanmaku : this.proc.hideGiftDanmaku;
-            this.proc.showGift = x.config.showGift !=undefined?  x.config.showGift : this.proc.showGift;
+            this.proc.hideGiftDanmaku = x.config.hideGiftDanmaku != undefined ? x.config.hideGiftDanmaku : this.proc.hideGiftDanmaku;
+            this.proc.showGift = x.config.showGift != undefined ? x.config.showGift : this.proc.showGift;
             this.proc.minGiftValue = x.config.minGiftValue || this.proc.minGiftValue;
             this.proc.showJapanese = x.config.showJapanese || this.proc.showJapanese;
             this.proc.silverGiftRatio = x.config.silverGiftRatio || this.proc.silverGiftRatio;
@@ -109,7 +109,7 @@ export class GKDComponent {
             this.proc.customGiftLevel = x.config.customGiftLevel || this.proc.customGiftLevel;
             this.proc.customGiftLevel.sort((a, b) => b.value - a.value); // sort from large to small
             this.renderer.displayMode = x.config.displayMode || this.renderer.displayMode;
-            this.renderer.groupSimilar = x.config.groupSimilar !=undefined? x.config.groupSimilar : this.renderer.groupSimilar;
+            this.renderer.groupSimilar = x.config.groupSimilar != undefined ? x.config.groupSimilar : this.renderer.groupSimilar;
             this.renderer.groupSimilarWindow = x.config.groupSimilarWindow || this.renderer.groupSimilarWindow;
             this.renderer.maxDammakuNum = x.config.maxDammakuNumber || this.renderer.maxDammakuNum;
           }

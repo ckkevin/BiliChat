@@ -45,7 +45,7 @@ class GiftMessage implements IMessage {
         this.tickerExpire = Date.now() + this.tickerTime;
     }
 
-    get tickerValid() :boolean{
+    get tickerValid(): boolean {
         return Date.now() < this.tickerExpire;
     }
 

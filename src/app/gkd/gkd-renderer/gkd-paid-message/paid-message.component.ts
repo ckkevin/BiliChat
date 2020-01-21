@@ -12,12 +12,12 @@ export class GKDLegacyPaidMessageComponent implements OnInit {
 
   @Input() item: GiftMessage;
 
-  constructor(private ele:ElementRef,
-    private renderer:Renderer2,
+  constructor(private ele: ElementRef,
+    private renderer: Renderer2,
     private translate: TranslateService) { }
 
   ngOnInit() {
-    this.renderer.setAttribute(this.ele.nativeElement,"style",`
+    this.renderer.setAttribute(this.ele.nativeElement, 'style', `
     --yt-live-chat-paid-message-primary-color: ${this.item.color_theme.color_primary};
     --yt-live-chat-paid-message-secondary-color: ${this.item.color_theme.color_secondary};
     --yt-live-chat-paid-message-header-color: ${this.item.color_theme.color_header};
@@ -27,10 +27,9 @@ export class GKDLegacyPaidMessageComponent implements OnInit {
   }
 
   get title() {
-    if(this.item.superchat){
+    if (this.item.superchat) {
       return this.item.username;
-    }
-    else if (this.item.guard_type > 0) {
+    } else if (this.item.guard_type > 0) {
       return this.translate.instant('NEW_MEMBER_TITLE').replace('{memberType}', this.item.gift);
     } else {
       return this.translate.instant('NEW_GIFT_TITLE').replace('{username}', this.item.username);
@@ -38,10 +37,9 @@ export class GKDLegacyPaidMessageComponent implements OnInit {
   }
 
   get subtitle() {
-    if(this.item.superchat){
+    if (this.item.superchat) {
       return `CN¥${this.item.value}`;
-    }
-    else if (this.item.guard_type > 0) {
+    } else if (this.item.guard_type > 0) {
       return this.translate.instant('NEW_MEMBER_SUBTITLE').replace('{username}', this.item.username);
     } else {
       return this.translate.instant('NEW_GIFT_SUBTITLE').replace('{gift}', this.item.gift).replace('{amount}', this.item.amount);

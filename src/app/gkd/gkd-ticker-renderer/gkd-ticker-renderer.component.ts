@@ -16,7 +16,7 @@ export class GkdTickerRendererComponent {
   appendGift(gift: GiftMessage) {
     this.danmakuList = this.danmakuList.filter(x => {
       return x.tickerValid;
-    })
+    });
     this.danmakuList.unshift(gift);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef, Input, Output, EventEmitter, HostListener, Inject, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import { Component, Renderer2, ViewChild, ElementRef, Input, Output, EventEmitter, Inject, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
 import { IMessage, DanmakuMessage } from '../../danmaku.def';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -16,10 +16,20 @@ export class GKDRendererComponent {
   groupSimilarCache: Array<DanmakuMessage>;
 
   @ViewChild('items', { static: true }) items: ElementRef;
-
   @ViewChild('shadowItem', { static: true }) shadowItem: ElementRef;
+  @Input() public maxDammakuNum = 100;
+  @Input() public displayMode = 3;
+  @Input() public groupSimilar = true;
+  @Output() public onawake: EventEmitter<any>;
+  @Input() public groupSimilarWindow = 5;
 
-  constructor(private renderer2: Renderer2,@Inject(PLATFORM_ID) private plat: Object) {
+
+  private animationHeight: number = 0;
+  private animationSumup: number = 0;
+  private animating: boolean = false;
+  private baseSpeed: number = 0.45;
+
+  constructor(private renderer2: Renderer2, @Inject(PLATFORM_ID) private plat: Object) {
     this.danmakuList = [];
     this.waitForRendering = [];
     this.groupSimilarCache = [];
@@ -29,39 +39,23 @@ export class GKDRendererComponent {
 
   ngOnInit() {
     if (isPlatformBrowser(this.plat)) {
-      requestAnimationFrame(()=>{
-        //empty frame
+      requestAnimationFrame(() => {
+        // empty frame
         requestAnimationFrame(this.awake.bind(this));
       });
     }
   }
 
-  @Input() public maxDammakuNum = 100;
-
-  @Input() public displayMode = 3;
-
-  @Input() public groupSimilar = true;
-
-  @Output() public onawake: EventEmitter<any>;
-
-  @Input() public groupSimilarWindow = 5;
-
   private timeFunction(total: number, sumup: number): number {
-    return total - sumup * this.baseSpeed; //linear function
+    return total - sumup * this.baseSpeed; // linear function
   }
 
-  private animationHeight: number = 0;
-  private animationSumup: number = 0;
-  private animating: boolean = false;
-
-  private baseSpeed: number = 0.45;
-
-  awake() {
+  private awake() {
     this.onawake.emit();
-    requestAnimationFrame(this.onFrame.bind(this, window.performance.now(), 0));
+    requestAnimationFrame(this.update.bind(this, window.performance.now(), 0));
   }
 
-  onFrame(lastFrame: number, ttw: number) {
+  private update(lastFrame: number, ttw: number) {
     const now: number = window.performance.now();
     const interval: number = now - lastFrame;
     this.animationSumup += interval;
@@ -114,7 +108,7 @@ export class GKDRendererComponent {
 
     ttw -= interval;
 
-    requestAnimationFrame(this.onFrame.bind(this, now, ttw));
+    requestAnimationFrame(this.update.bind(this, now, ttw));
   }
 
   public sendSystemInfo(msg: string) {

@@ -23,13 +23,13 @@ export class GkdTickerComponent {
   get progressStyle(): any {
     return {
       'background': `linear-gradient(90deg, ${this.item.color_theme.color_secondary},${this.item.color_theme.color_secondary} ${this.progress * 100 + '%'},${this.item.color_theme.color_primary} ${this.progress * 100 + '%'},${this.item.color_theme.color_primary})`
-    }
+    };
   }
 
   get contentStyle(): any {
     return {
       'color': this.item.color_theme.color_header
-    }
+    };
   }
 
   get text(): string {
@@ -37,9 +37,8 @@ export class GkdTickerComponent {
       return `CN¥${this.item.value}`;
     } else if (this.item.guard_type > 0) {
       return this.item.gift;
-    }
-    else {
-      return `${this.item.gift} ×${this.item.amount}`
+    } else {
+      return `${this.item.gift} ×${this.item.amount}`;
     }
   }
 

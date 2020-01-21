@@ -9,7 +9,7 @@ import { ImageComponent } from './yt-image/image.component';
   imports: [
     CommonModule
   ],
-  exports:[
+  exports: [
     ImageComponent
   ]
 })

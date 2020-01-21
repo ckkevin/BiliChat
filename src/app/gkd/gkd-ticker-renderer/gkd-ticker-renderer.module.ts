@@ -12,6 +12,6 @@ import { SharedModule } from '../../shared/shared.module';
     CommonModule,
     SharedModule
   ],
-  exports:[GkdTickerRendererComponent]
+  exports: [GkdTickerRendererComponent]
 })
 export class GkdTickerRendererModule { }
