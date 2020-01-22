@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
 
-export interface CommentSource {
+export interface CommentVendor {
     connect(params: any): Observable<any>;
 }

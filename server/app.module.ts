@@ -2,6 +2,7 @@ import { Module, HttpModule } from '@nestjs/common';
 import { AngularUniversalModule } from '@nestjs/ng-universal';
 import { join } from 'path';
 import { BilibiliApiController } from './controllers/bilibili.api.controller';
+import { HuyaController } from './controllers/huya.controller';
 
 @Module({
   imports: [
@@ -12,6 +13,6 @@ import { BilibiliApiController } from './controllers/bilibili.api.controller';
     }),
     HttpModule
   ],
-  controllers:[BilibiliApiController]
+  controllers:[BilibiliApiController,HuyaController]
 })
 export class ApplicationModule {}

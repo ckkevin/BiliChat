@@ -15,7 +15,8 @@ export class BilibiliApiController {
         const emojis = await this.http.get("https://api.bilibili.com/x/v2/reply/v2/emojis").toPromise();
         return {
             info: ret.data.data,
-            msgs: msgs.data.data.room
+            msgs: msgs.data.data.room,
+            emojis: emojis.data.data
         };
     }
 
